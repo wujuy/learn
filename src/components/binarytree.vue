@@ -18,6 +18,7 @@ export default {
   methods: {
     binaryTree (fruit) {
       this.bag = fruit
+      console.log(this.bag)
     }
   }
 }
