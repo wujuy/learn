@@ -1,8 +1,7 @@
 <template>
   <div class="hello">
-    <h1  >{{ bag }}</h1>
-    <button v-for='(fruit,i) in fruits' :key='i' :class="[i==0 ? 'orange':i==1 ? 'green':i==2 ? 'blue':'']" @click = 'binaryTree(fruit)'>{{fruit}}</button>
-  </div>
+    <h1  >{{ msg }}</h1>
+ </div>
 </template>
 
 <script>
@@ -10,15 +9,41 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      bag: 'book',
-      fruits: [ 'strawberry', 'mango', 'orange' ]
+      msg: 'Welcome to Your Vue.js App'
     }
   },
   methods: {
-    binaryTree (fruit) {
-      this.bag = fruit
-      console.log(this.bag)
+    binaryTree () {
+      var Node = function (key) {
+        this.key = key
+        this.left = null
+        this.right = null
+      }
+      var root = null
+
+      var insertNode = function (node, newNode) {
+        if (newNode.key < node.key) {
+          if (node.left == null) {
+            node.left = newNode
+          } else {
+            insertNode(node.left, newNode)
+          }
+        } else {
+          if (node.right == null) {
+            node.right = newNode
+          } else {
+            insertNode(node.right, newNode)
+          }
+        }
+      }
+      this.insert = function (key) {
+        var newNode = new Node(key)
+        if (root == null) {
+          root = newNode
+        } else {
+          insertNode(root, newNode)
+        }
+      }
     }
   }
 }
